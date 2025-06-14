@@ -1,8 +1,8 @@
 {
-  "name": "vscode-copilot-confluence-chat-tool",
+  "name": "vscode-copilot-atlassian-chat-tool",
   "publisher": "vscode-samples",
-  "displayName": "Confluence Chat Tool",
-  "description": "An intelligent Confluence integration for VS Code Copilot Chat that provides smart search capabilities, keyword extraction, and context-aware content discovery. Search using natural language, paragraphs, or keywords without needing exact page titles or space keys.",
+  "displayName": "Atlassian Chat Tool",
+  "description": "A unified chat tool that provides Jira and Confluence integration via language model tools for querying issue details and intelligent content search",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -14,6 +14,31 @@
   "activationEvents": [],
   "contributes": {
     "languageModelTools": [
+      {
+        "name": "jira-tool_getIssue",
+        "tags": [
+          "jira",
+          "issue",
+          "details"
+        ],
+        "toolReferenceName": "jira",
+        "displayName": "Get Jira Issue",
+        "modelDescription": "Get detailed information about a specific Jira issue by key (e.g., PROJ-123, TASK-456)",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(issue-opened)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "issueKey": {
+              "type": "string",
+              "description": "The Jira issue key (e.g., PROJ-123, TASK-456)"
+            }
+          },
+          "required": [
+            "issueKey"
+          ]
+        }
+      },
       {
         "name": "confluence-tool",
         "tags": [
@@ -61,17 +86,29 @@
       }
     ],
     "configuration": {
-      "title": "Confluence Chat Tool",
+      "title": "Atlassian Chat Tool",
       "properties": {
-        "confluenceChatTool.baseUrl": {
+        "atlassianChatTool.jira.baseUrl": {
+          "type": "string",
+          "description": "Your Jira instance URL (e.g., https://yourcompany.atlassian.net)"
+        },
+        "atlassianChatTool.jira.email": {
+          "type": "string",
+          "description": "Your Jira account email"
+        },
+        "atlassianChatTool.jira.apiToken": {
+          "type": "string",
+          "description": "Your Jira API token (create one at https://id.atlassian.com/manage-profile/security/api-tokens)"
+        },
+        "atlassianChatTool.confluence.baseUrl": {
           "type": "string",
           "description": "Your Confluence instance URL (e.g., https://yourcompany.atlassian.net/wiki)"
         },
-        "confluenceChatTool.email": {
+        "atlassianChatTool.confluence.email": {
           "type": "string",
           "description": "Your Atlassian account email"
         },
-        "confluenceChatTool.apiToken": {
+        "atlassianChatTool.confluence.apiToken": {
           "type": "string",
           "description": "Your Atlassian API token (create one at https://id.atlassian.com/manage-profile/security/api-tokens)"
         }

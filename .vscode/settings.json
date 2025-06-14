@@ -1,0 +1,16 @@
+{
+  "files.exclude": {
+    "out": false,
+    "node_modules": true,
+    "**/.git": true,
+    "**/.DS_Store": true
+  },
+  "search.exclude": {
+    "out": true,
+    "node_modules": true,
+    "**/*.code-search": true
+  },
+  "typescript.tsc.autoDetect": "off",
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.suggest.autoImports": true
+}
