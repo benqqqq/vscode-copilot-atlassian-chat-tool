@@ -1,4 +1,7 @@
 node_modules
 .vscode-test/
 *.vsix
-out/ 
+out/
+
+# Extension configuration (contains API tokens)
+.vscode/settings.json 

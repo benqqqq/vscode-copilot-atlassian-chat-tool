@@ -107,11 +107,32 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "help": "echo '\n🔧 Available Commands:\n' && echo '  npm run install-deps  - Install dependencies' && echo '  npm run update-deps   - Update dependencies' && echo '  npm run build         - Build extension' && echo '  npm run dev           - Start development mode (watch)' && echo '  npm run package       - Package extension for distribution' && echo '  npm run clean         - Clean build artifacts' && echo '  npm run test          - Run tests' && echo '  npm run lint          - Run linter' && echo '  npm run lint:fix      - Run linter with auto-fix' && echo '  npm run config-check  - Check extension configuration' && echo '  npm run config-set    - Set up extension configuration' && echo '  npm run install-local - Install extension locally (first time)' && echo '  npm run update-local  - Update locally installed extension' && echo '  npm run setup         - Quick development setup' && echo '  npm run ci            - Full CI pipeline' && echo ''",
+    "build": "npm run compile",
+    "dev": "npm run watch",
+    "package": "vsce package",
+    "install-deps": "npm install",
+    "update-deps": "npm update",
+    "clean": "rimraf out *.vsix",
+    "test": "echo 'No tests specified yet'",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix",
+    "install-local": "npm run package && code --install-extension $(ls -t *.vsix | head -1)",
+    "update-local": "npm run package && code --install-extension $(ls -t *.vsix | head -1) --force",
+    "config-check": "echo 'Current VS Code extensions:' && code --list-extensions | grep -E '(atlassian|copilot)' || echo 'Extension not installed locally' && echo '' && echo 'Workspace settings:' && (test -f .vscode/settings.json && grep -A 5 'atlassianChatTool' .vscode/settings.json || echo 'No configuration found')",
+    "config-set": "echo 'Setting up Atlassian configuration...' && mkdir -p .vscode && read -p 'Base URL (e.g., https://company.atlassian.net): ' url && read -p 'Email: ' email && read -p 'API Token: ' token && echo \"{\\n  \\\"atlassianChatTool.baseUrl\\\": \\\"$url\\\",\\n  \\\"atlassianChatTool.email\\\": \\\"$email\\\",\\n  \\\"atlassianChatTool.apiToken\\\": \\\"$token\\\"\\n}\" > .vscode/settings.json && echo '✅ Configuration saved to .vscode/settings.json'",
+    "setup": "npm run install-deps && npm run config-set",
+    "ci": "npm run clean && npm run install-deps && npm run build && npm run test"
   },
   "devDependencies": {
     "@types/vscode": "^1.95.0",
     "@types/node": "^20",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "@vscode/vsce": "^3.0.0",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "rimraf": "^5.0.5"
   }
 }
