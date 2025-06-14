@@ -1,0 +1,92 @@
+{
+  "name": "vscode-copilot-confluence-chat-tool",
+  "publisher": "vscode-samples",
+  "displayName": "Confluence Chat Tool",
+  "description": "An intelligent Confluence integration for VS Code Copilot Chat that provides smart search capabilities, keyword extraction, and context-aware content discovery. Search using natural language, paragraphs, or keywords without needing exact page titles or space keys.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "activationEvents": [],
+  "contributes": {
+    "languageModelTools": [
+      {
+        "name": "confluence-tool",
+        "tags": [
+          "confluence",
+          "search",
+          "intelligent",
+          "context",
+          "content"
+        ],
+        "toolReferenceName": "confluence",
+        "displayName": "Search Confluence",
+        "modelDescription": "Intelligently search Confluence based on paragraphs, keywords, or chat context. This tool extracts relevant keywords from natural language content and performs sophisticated searches to find related pages. Use this when the user provides context, paragraphs, or wants to find pages related to their discussion.",
+        "canBeReferencedInPrompt": true,
+        "icon": "$(search-fuzzy)",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The content, paragraph, keywords, or context to search for related Confluence pages"
+            },
+            "context": {
+              "type": "string",
+              "description": "Optional additional context from chat history or related information"
+            },
+            "spaceKey": {
+              "type": "string",
+              "description": "Optional space key to limit search to a specific space"
+            },
+            "limit": {
+              "type": "number",
+              "description": "Maximum number of results to return (default: 10)",
+              "minimum": 1,
+              "maximum": 25
+            },
+            "includeContent": {
+              "type": "boolean",
+              "description": "Whether to include page content in results (default: true)"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        }
+      }
+    ],
+    "configuration": {
+      "title": "Confluence Chat Tool",
+      "properties": {
+        "confluenceChatTool.baseUrl": {
+          "type": "string",
+          "description": "Your Confluence instance URL (e.g., https://yourcompany.atlassian.net/wiki)"
+        },
+        "confluenceChatTool.email": {
+          "type": "string",
+          "description": "Your Atlassian account email"
+        },
+        "confluenceChatTool.apiToken": {
+          "type": "string",
+          "description": "Your Atlassian API token (create one at https://id.atlassian.com/manage-profile/security/api-tokens)"
+        }
+      }
+    }
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "@types/node": "^20",
+    "typescript": "^5.8.2"
+  }
+}
