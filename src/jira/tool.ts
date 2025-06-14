@@ -5,7 +5,7 @@ export class JiraIssueTool
   implements vscode.LanguageModelTool<IJiraIssueParameters>
 {
   private getJiraConfig(): JiraConfig | null {
-    const config = vscode.workspace.getConfiguration("atlassianChatTool.jira");
+    const config = vscode.workspace.getConfiguration("atlassianChatTool");
     const baseUrl = config.get<string>("baseUrl");
     const email = config.get<string>("email");
     const apiToken = config.get<string>("apiToken");
@@ -88,11 +88,11 @@ export class JiraIssueTool
             JSON.stringify(
               {
                 error:
-                  "Jira configuration is incomplete. Please configure your Jira base URL, email, and API token in VS Code settings.",
+                  "Atlassian configuration is incomplete. Please configure your Atlassian base URL, email, and API token in VS Code settings.",
                 requiredSettings: [
-                  "atlassianChatTool.jira.baseUrl",
-                  "atlassianChatTool.jira.email",
-                  "atlassianChatTool.jira.apiToken",
+                  "atlassianChatTool.baseUrl",
+                  "atlassianChatTool.email",
+                  "atlassianChatTool.apiToken",
                 ],
                 helpUrl:
                   "https://id.atlassian.com/manage-profile/security/api-tokens",

@@ -9,15 +9,18 @@ export class ConfluenceTool
   implements vscode.LanguageModelTool<IConfluenceParameters>
 {
   private getConfluenceConfig(): ConfluenceConfig | null {
-    const config = vscode.workspace.getConfiguration(
-      "atlassianChatTool.confluence"
-    );
-    const baseUrl = config.get<string>("baseUrl");
+    const config = vscode.workspace.getConfiguration("atlassianChatTool");
+    let baseUrl = config.get<string>("baseUrl");
     const email = config.get<string>("email");
     const apiToken = config.get<string>("apiToken");
 
     if (!baseUrl || !email || !apiToken) {
       return null;
+    }
+
+    // Ensure baseUrl has the /wiki suffix for Confluence
+    if (!baseUrl.includes("/wiki")) {
+      baseUrl = baseUrl.replace(/\/$/, "") + "/wiki";
     }
 
     return { baseUrl, email, apiToken };
@@ -318,11 +321,11 @@ export class ConfluenceTool
             JSON.stringify(
               {
                 error:
-                  "Confluence configuration is incomplete. Please configure your Confluence base URL, email, and API token in VS Code settings.",
+                  "Atlassian configuration is incomplete. Please configure your Atlassian base URL, email, and API token in VS Code settings.",
                 requiredSettings: [
-                  "atlassianChatTool.confluence.baseUrl",
-                  "atlassianChatTool.confluence.email",
-                  "atlassianChatTool.confluence.apiToken",
+                  "atlassianChatTool.baseUrl",
+                  "atlassianChatTool.email",
+                  "atlassianChatTool.apiToken",
                 ],
                 helpUrl:
                   "https://id.atlassian.com/manage-profile/security/api-tokens",

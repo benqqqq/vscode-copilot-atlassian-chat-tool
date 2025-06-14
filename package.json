@@ -88,27 +88,15 @@
     "configuration": {
       "title": "Atlassian Chat Tool",
       "properties": {
-        "atlassianChatTool.jira.baseUrl": {
+        "atlassianChatTool.baseUrl": {
           "type": "string",
-          "description": "Your Jira instance URL (e.g., https://yourcompany.atlassian.net)"
+          "description": "Your Atlassian instance URL (e.g., https://yourcompany.atlassian.net)"
         },
-        "atlassianChatTool.jira.email": {
-          "type": "string",
-          "description": "Your Jira account email"
-        },
-        "atlassianChatTool.jira.apiToken": {
-          "type": "string",
-          "description": "Your Jira API token (create one at https://id.atlassian.com/manage-profile/security/api-tokens)"
-        },
-        "atlassianChatTool.confluence.baseUrl": {
-          "type": "string",
-          "description": "Your Confluence instance URL (e.g., https://yourcompany.atlassian.net/wiki)"
-        },
-        "atlassianChatTool.confluence.email": {
+        "atlassianChatTool.email": {
           "type": "string",
           "description": "Your Atlassian account email"
         },
-        "atlassianChatTool.confluence.apiToken": {
+        "atlassianChatTool.apiToken": {
           "type": "string",
           "description": "Your Atlassian API token (create one at https://id.atlassian.com/manage-profile/security/api-tokens)"
         }
