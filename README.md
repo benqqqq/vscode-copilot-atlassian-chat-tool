@@ -16,12 +16,9 @@ Add to VS Code settings:
 
 ```json
 {
-  "atlassianChatTool.jira.baseUrl": "https://yourcompany.atlassian.net",
-  "atlassianChatTool.jira.email": "your.email@company.com",
-  "atlassianChatTool.jira.apiToken": "your-api-token",
-  "atlassianChatTool.confluence.baseUrl": "https://yourcompany.atlassian.net/wiki",
-  "atlassianChatTool.confluence.email": "your.email@company.com",
-  "atlassianChatTool.confluence.apiToken": "your-api-token"
+  "atlassianChatTool.baseUrl": "https://yourcompany.atlassian.net",
+  "atlassianChatTool.email": "your.email@company.com",
+  "atlassianChatTool.apiToken": "your-api-token"
 }
 ```
 
